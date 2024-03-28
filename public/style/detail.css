@@ -1,0 +1,194 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+}
+
+.detail-card {
+    display: flex;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1200px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5%;
+}
+
+.detail-card {
+    background: #f1f1f1;
+    background-image: linear-gradient(270deg, transparent 50px, #ffb4b8 50px, #ffb4b8 52px, transparent 52px), linear-gradient(#e1e1e1 0.1em, transparent 0.1em);
+    background-size: 100% 30px;
+    gap: 44px;
+  }
+  
+
+
+body {
+    /* Dark mode colors and gradient */
+    background: #121212; /* Fallback for browsers that don't support gradients */
+    background: linear-gradient(
+      135deg,
+      #121212 25%,
+      #1a1a1a 25%,
+      #1a1a1a 50%,
+      #121212 50%,
+      #121212 75%,
+      #1a1a1a 75%,
+      #1a1a1a
+    );
+    background-size: 40px 40px;
+  
+    /* Animation */
+    animation: move 4s linear infinite;
+  }
+  
+  @keyframes move {
+    0% {
+      background-position: 0 0;
+    }
+    100% {
+      background-position: 40px 40px;
+    }
+  }
+  
+  
+
+.detail-image {
+    height: 567px; /* Hauteur fixe */
+    object-fit: cover; /* S'assure que l'image couvre la zone sans distorsion */
+    border-radius: 10px 0 0 10px;
+}
+
+.detail-content {
+    width: 41%;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 26px;
+    background-color: #ffffff7a; 
+    border-radius: 20px;
+}
+
+.article-title, .article-summary, .article-content {
+    margin-bottom: 20px;
+}
+ 
+.retour {
+    align-self: center;
+    padding: 10px 20px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.articles-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+.article-container {
+    cursor: pointer;
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 40px); /* Ajuste pour 4 cartes par ligne */
+    background-color: #f9f9f9;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.article-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.article-image {
+    width: 100%; /* Ajuste la largeur de l'image à celle du conteneur */
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.article-title, .article-summary {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.article-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.editer, .supprimer {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.editer {
+    background-color: #007bff;
+    color: white;
+}
+
+.supprimer {
+    background-color: #dc3545;
+    color: white;
+}
+
+.editer:hover {
+    background-color: #0056b3;
+}
+
+.supprimer:hover {
+    background-color: #c82333;
+}
+
+/* Styliser la modal Bootstrap */
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header, .modal-footer {
+    border-bottom: none;
+    border-top: none;
+}
+
+.modal-body img {
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+/* Bouton de fermeture de modal personnalisé */
+.close {
+    color: #aaa;
+    text-shadow: none;
+    opacity: 1;
+}
+
+.close:hover {
+    color: #777;
+}
+
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ asset('style/nav.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ path('app_article') }}">Accueil</a>
+        {% if app.user %}
+            <a href="{{ path('app_logout') }}">Déconnexion</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Connexion</a>
+            <a href="{{ path('app_register') }}">Inscription</a>
+        {% endif %}
+    </div>
+    {% block body %}{% endblock %}
+</body>
+</html>

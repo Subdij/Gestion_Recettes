@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('style/article.css') }}">
+    <h1>Modifier l'article</h1>
+
+    {{ form_start(form) }}
+    {% if article.imageFilename %}
+        <img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" alt="Image actuelle de l'article" style="max-width: 300px; margin-bottom: 10px; margin-left: 70px;">
+    {% endif %}
+
+    <!-- Le reste du formulaire pour éditer l'article -->
+    {{ form_widget(form) }}
+    {{ form_end(form) }}
+{% endblock %}
