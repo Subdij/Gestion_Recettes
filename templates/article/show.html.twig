@@ -14,7 +14,7 @@
             <h2 class="article-summary-title">Résumé : </h2>
             <p class="article-summary">{{ article.summary }}</p>
             <h2 class="article-content-title">Ingrédient : </h2>
-            <div class="article-content">{{ article.content | raw }}</div>
+            <div class="article-content">{{ article.content|nl2br }}</div>            
             <a href="{{ path('app_article') }}" class="retour">Revenir à la liste</a>
         </div>
     </div>

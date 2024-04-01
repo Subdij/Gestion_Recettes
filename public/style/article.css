@@ -201,4 +201,71 @@ button[type="submit"]:hover {
     background-size: 40px 60px;
 }
 
-  
+@media (max-width: 1230px) {
+    .articles-container {
+        grid-template-columns: repeat(3, 1fr); /* Affiche deux articles par ligne au lieu de quatre */
+        gap: 20px; /* Diminue l'espace entre les articles */
+        padding: 20px; /* Réduit le padding pour économiser de l'espace */
+    }
+
+    .article-container {
+        padding: 10px; /* Réduit le padding autour des articles */
+    }
+
+    .article-image {
+        height: 150px; /* Réduit la taille des images */
+    }
+
+    form {
+        width: 80%; /* Augmente la largeur du formulaire pour le rendre plus lisible */
+    }
+
+    h1, .mb-3 {
+        font-size: 1.5em; /* Réduit la taille du texte pour les titres */
+    }
+}
+
+
+@media (max-width: 768px) {
+    .articles-container {
+        grid-template-columns: repeat(2, 1fr); /* Affiche deux articles par ligne au lieu de quatre */
+        gap: 20px; /* Diminue l'espace entre les articles */
+        padding: 20px; /* Réduit le padding pour économiser de l'espace */
+    }
+
+    .article-container {
+        padding: 10px; /* Réduit le padding autour des articles */
+    }
+
+    .article-image {
+        height: 150px; /* Réduit la taille des images */
+    }
+
+    form {
+        width: 80%; /* Augmente la largeur du formulaire pour le rendre plus lisible */
+    }
+
+    h1, .mb-3 {
+        font-size: 1.5em; /* Réduit la taille du texte pour les titres */
+    }
+}
+
+
+@media (max-width: 480px) {
+    .articles-container {
+        grid-template-columns: 1fr; /* Affiche les articles en une seule colonne */
+    }
+
+    form, input[type="text"], input[type="email"], input[type="password"], textarea, button[type="submit"] {
+        width: 100%; /* Utilise toute la largeur disponible pour le formulaire et ses champs */
+    }
+
+    .article-actions {
+        flex-direction: column; /* Empile les boutons d'action verticalement */
+        gap: 5px;
+    }
+
+    .editer, .supprimer {
+        width: auto; /* Permet aux boutons de s'adapter au texte */
+    }
+}

@@ -214,3 +214,34 @@ body {
 }
 
 
+@media (max-width: 1000px) {
+    .detail-card {
+        flex-direction: column; /* Empile verticalement l'image et le contenu */
+        gap: 20px; /* Réduit l'espace entre les éléments pour un design plus compact */
+    }
+
+    .detail-image {
+        max-width: 50%; /* Permet à l'image de s'adapter à la largeur */
+        height: auto; /* Ajuste la hauteur automatiquement pour maintenir l'aspect ratio */
+    }
+
+    .detail-content {
+        width: 100%; /* Permet au contenu de remplir tout l'espace disponible */
+        padding: 10px; /* Réduit le padding pour un meilleur usage de l'espace */
+    }
+}
+
+@media (max-width: 480px) {
+    .article-container {
+        width: 100%; /* Les articles utilisent toute la largeur disponible */
+    }
+
+    .article-title, .article-summary, .article-content {
+        padding: 0 10px; /* Ajoute du padding pour éviter que le texte touche les bords */
+        font-size: smaller; /* Assure que le texte reste lisible même sur petits écrans */
+    }
+
+    .editer, .supprimer {
+        font-size: 12px; /* Réduit encore la taille du texte pour les boutons */
+    }
+}
