@@ -1,3 +1,4 @@
+{% set title = 'Détail article' %}
 {% extends 'base.html.twig' %}
 
 {% block body %}
@@ -12,7 +13,7 @@
             <h1 class="article-title">{{ article.title }}</h1>
             <h2 class="article-summary-title">Résumé : </h2>
             <p class="article-summary">{{ article.summary }}</p>
-            <h2 class="article-content-title">Contenu : </h2>
+            <h2 class="article-content-title">Ingrédient : </h2>
             <div class="article-content">{{ article.content | raw }}</div>
             <a href="{{ path('app_article') }}" class="retour">Revenir à la liste</a>
         </div>

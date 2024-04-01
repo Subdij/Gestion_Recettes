@@ -18,44 +18,50 @@ class ArticleController extends AbstractController
 {
 
     #[Route('/article', name: 'app_article')]
-public function index(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params): Response
-{
-    $article = new Article();
-    $form = $this->createForm(ArticleType::class, $article);
-
-    $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        /** @var UploadedFile $imageFile */
-        $imageFile = $form->get('imageFilename')->getData();
-        if ($imageFile) {
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
-
-            try {
-                $imageFile->move(
-                    $params->get('articles_directory'),
-                    $newFilename
-                );
-                $article->setImageFilename($newFilename);
-            } catch (FileException $e) {
-                // Gérer l'exception si quelque chose se passe pendant le téléchargement du fichier
+    public function index(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params): Response
+    {
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+    
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('imageFilename')->getData();
+            if ($imageFile) {
+                $fileExtension = $imageFile->guessExtension();
+                if (!in_array($fileExtension, ['jpg', 'jpeg', 'png'])) {
+                    $this->addFlash('danger', 'Seuls les fichiers JPG et PNG sont autorisés.');
+                    return $this->redirectToRoute('app_article');
+                }
+    
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$fileExtension;
+    
+                try {
+                    $imageFile->move(
+                        $params->get('articles_directory'),
+                        $newFilename
+                    );
+                    $article->setImageFilename($newFilename);
+                } catch (FileException $e) {
+                    
+                }
             }
+    
+            $entityManager->persist($article);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_article');
         }
-
-        $entityManager->persist($article);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_article');
+    
+        $articles = $entityManager->getRepository(Article::class)->findAll();
+    
+        return $this->render('article/index.html.twig', [
+            'articles' => $articles,
+            'form' => $form->createView(),
+        ]);
     }
-
-    $articles = $entityManager->getRepository(Article::class)->findAll();
-
-    return $this->render('article/index.html.twig', [
-        'articles' => $articles,
-        'form' => $form->createView(),
-    ]);
-}
 
 
 
@@ -95,17 +101,21 @@ public function edit(int $id, Request $request, EntityManagerInterface $entityMa
         /** @var UploadedFile $imageFile */
         $imageFile = $form->get('imageFilename')->getData();
         if ($imageFile) {
+            $fileExtension = $imageFile->guessExtension();
+            if (!in_array($fileExtension, ['jpg', 'jpeg', 'png'])) {
+                $this->addFlash('danger', 'Seuls les fichiers JPG et PNG sont autorisés.');
+                return $this->redirectToRoute('article_edit', ['id' => $id]);
+            }
+
             $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
             $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$imageFile->guessExtension();
+            $newFilename = $safeFilename.'-'.uniqid().'.'.$fileExtension;
 
             try {
                 $imageFile->move(
                     $params->get('articles_directory'),
                     $newFilename
                 );
-                // Supprimer l'ancienne image si nécessaire
-                // Mettre à jour le nom de fichier de l'image dans l'article
                 $article->setImageFilename($newFilename);
             } catch (FileException $e) {
                 // Gérer l'exception si quelque chose se passe pendant le téléchargement du fichier
@@ -117,8 +127,8 @@ public function edit(int $id, Request $request, EntityManagerInterface $entityMa
     }
 
     return $this->render('article/edit.html.twig', [
-        'form' => $form->createView(),
         'article' => $article,
+        'form' => $form->createView(),
     ]);
 }
 

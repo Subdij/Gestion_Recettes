@@ -1,8 +1,11 @@
+{% set title = 'Éditer Article' %}
 {% extends 'base.html.twig' %}
 
 {% block body %}
 <link rel="stylesheet" href="{{ asset('style/article.css') }}">
-    <h1>Modifier l'article</h1>
+    
+    <div class="container">
+        <h1>Modifier l'article</h1>
 
     {{ form_start(form) }}
     {% if article.imageFilename %}
@@ -12,4 +15,5 @@
     <!-- Le reste du formulaire pour éditer l'article -->
     {{ form_widget(form) }}
     {{ form_end(form) }}
+</div>
 {% endblock %}

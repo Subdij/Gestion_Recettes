@@ -2,7 +2,6 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
 
 body, html {
@@ -11,44 +10,11 @@ body, html {
     font-family: Arial, sans-serif;
 }
 
-h1, .mb-3 {
+h1{
     text-align: center;
     padding-top: 40px;
-    color: #fff;
-    font-size: 2em;
-}
-
-#article_summary {
-    min-width: 100px;
-    max-width: 500px;
-    min-height: 100px;
-    max-height: 200px;
-    width: 100%;
-    height: auto;
-    resize: vertical;
-
-}
-
-#article_content {
-    min-width: 100px;
-    max-width: 500px;
-    min-height: 100px;
-    max-height: 200px;
-    width: 100%;
-    height: auto;
-    resize: vertical;
-}
-
-
-.article-summary {
-    font-size: 14px;
-    line-height: 1.4;
-    letter-spacing: 0.5px;
-    padding-right: 20px;
-    padding-left: 20px;
     color: black;
-    font-weight: 400;
-    text-align: justify;
+    font-size: 2em;
 }
 
 form h1 {
@@ -59,60 +25,17 @@ form h1 {
     margin-bottom: 20px;
 }
 
-.articles-container {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-    padding: 40px;
-}
-
-.article-container {
-    display: block; /* Précédemment défini à grid mais corrigé pour bloquer le modèle intérieur */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f9f9f9;
-    max-width: 100%; /* S'assure que la carte s'adapte à sa grille parente */
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-}
-
-.article-content-link {
-    text-decoration: none;
-    color: inherit;
-    display: block; /* Assure que le lien occupe tout l'espace de contenu */
-}
-
-.article-container:hover {
-    transform: scale(1.05); /* Légèrement plus grand pour attirer l'attention */
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Ombre plus prononcée pour un effet de "soulèvement" */
-}
-
-.article-content-link, .editer, .supprimer {
-    transition: color 0.3s ease;
-}
-
-.article-image {
-    height: 200px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.article-title, .article-summary, .article-actions {
-    margin-bottom: 15px;
-    margin-top: 15px;
-}
-
 form {
-    margin: 20px auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     background-color: #f9f9f9;
     width: 90%;
     max-width: 500px;
+    position: absolute; /* ou 'fixed', selon le contexte */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
 
 input[type="text"],
@@ -191,7 +114,7 @@ button[type="submit"]:hover {
 
 .container {
     width: 100%;
-    min-height: 100vh; /* Utilise min-height au lieu de height */
+    min-height: 100vh;
     background: radial-gradient(circle farthest-side at 0% 50%, #282828 23.5%, rgba(255, 170, 0, 0) 0) 21px 30px,
                 radial-gradient(circle farthest-side at 0% 50%, #2c3539 24%, rgba(240, 166, 17, 0) 0) 19px 30px,
                 linear-gradient(#282828 14%, rgba(240, 166, 17, 0) 0, rgba(240, 166, 17, 0) 85%, #282828 0) 0 0,
