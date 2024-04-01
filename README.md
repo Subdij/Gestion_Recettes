@@ -3,6 +3,7 @@
         <div class="section">
             <h1>🚀 Installation</h1>
             <h3>Prérequis</h3>
+            <p>Importer la Base de donnée <strong>chips</strong> Dans XAMPP.</p>
             <p>Le gestionnaire de dépendances <strong>Composer</strong> est nécessaire.</p>
             <pre class="command">composer install</pre>
             <h3>Lancement du Projet</h3>
