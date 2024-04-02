@@ -1,41 +1,50 @@
-{% set title = 'Liste des Chips' %}
-{% extends 'base.html.twig' %}
-
-{% block body %}
-<link rel="stylesheet" href="{{ asset('style/article.css') }}">
+{% set title = 'Liste des Chips' %} {% extends 'base.html.twig' %} {% block body%}
+<link rel="stylesheet" href="{{ asset('style/article.css') }}" />
 <div class="container">
-    <h1>Liste des Chips</h1>
+  <h1>Liste des Chips</h1>
 
-    {% if app.user %}
-    <div class="mb-3">
-        Bienvenue, <strong>{{ app.user.userIdentifier }}</strong>
-    </div>
-    {{ form_start(form) }}
-    <h1>Ajouter des Chips</h1>
-        {{ form_widget(form) }}
-    {{ form_end(form) }}
-    {% endif %}
+  {% if app.user %}
+  <div class="mb-3">
+    Bienvenue, <strong>{{ app.user.userIdentifier }}</strong>
+  </div>
+  {{ form_start(form) }}
+  <h1>Ajouter des Chips</h1>
+  {{ form_widget(form) }}
+  {{ form_end(form) }}
+  {% endif %}
 
-    <div class="articles-container">
-        {% for article in articles %}
-            <div class="article-container">
-                <!-- Lien pour voir le détail de l'article -->
-                <a href="{{ path('article_show', {'id': article.id}) }}" class="article-content-link">
-                    {% if article.imageFilename %}
-                        <img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" alt="Image de l'article" class="article-image"/>
-                    {% endif %}
-                    <h2 class="article-title">{{ article.title }}</h2>
-                    <p class="article-summary">{{ article.summary }}</p>
-                </a>
-                <!-- Boutons d'action hors du lien -->
-                {% if app.user %}
-                    <div class="article-actions">
-                        <a href="{{ path('article_edit', {'id': article.id}) }}" class="editer">Éditer</a>
-                        <a href="{{ path('article_delete', {'id': article.id}) }}" class="supprimer">Supprimer</a>
-                    </div>
-                {% endif %}
-            </div>
-        {% endfor %}
+  <div class="articles-container">
+    {% for article in articles %}
+    <div class="article-container">
+      <a
+        href="{{ path('article_show', { id: article.id }) }}"
+        class="article-content-link"
+      >
+        {% if article.imageFilename %}
+        <img
+          src="{{ asset('uploads/articles/' ~ article.imageFilename) }}"
+          alt="Image de l'article"
+          class="article-image"
+        />
+        {% endif %}
+        <h2 class="article-title">{{ article.title }}</h2>
+        <p class="article-summary">{{ article.summary }}</p>
+      </a>
+
+      {% if app.user %}
+      <div class="article-actions">
+        <a href="{{ path('article_edit', { id: article.id }) }}" class="editer"
+          >Éditer</a
+        >
+        <a
+          href="{{ path('article_delete', { id: article.id }) }}"
+          class="supprimer"
+          >Supprimer</a
+        >
+      </div>
+      {% endif %}
     </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %}

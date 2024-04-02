@@ -22,7 +22,7 @@ class ArticleType extends AbstractType
             ->add('imageFilename', FileType::class, [
                 'label' => 'Image de l\'article',
                 'mapped' => false,
-                'required' => false, 
+                'required' => false,
             ])
             ->add('save', SubmitType::class, ['label' => 'Enregistrer']);
     }

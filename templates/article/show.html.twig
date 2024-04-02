@@ -1,23 +1,24 @@
-{% set title = 'Détail article' %}
-{% extends 'base.html.twig' %}
+{% set title = 'Détail article' %} {% extends 'base.html.twig' %} {% block body
+%}
 
-{% block body %}
-
-<link rel="stylesheet" href="{{ asset('style/detail.css') }}">
+<link rel="stylesheet" href="{{ asset('style/detail.css') }}" />
 <div class="container">
-    <div class="detail-card">
-        {% if article.imageFilename %}
-            <img src="{{ asset('uploads/articles/' ~ article.imageFilename) }}" alt="Image de l'article" class="detail-image"/>
-        {% endif %}
-        <div class="detail-content">
-            <h1 class="article-title">{{ article.title }}</h1>
-            <h2 class="article-summary-title">Résumé : </h2>
-            <p class="article-summary">{{ article.summary }}</p>
-            <h2 class="article-content-title">Ingrédient : </h2>
-            <div class="article-content">{{ article.content|nl2br }}</div>            
-            <a href="{{ path('app_article') }}" class="retour">Revenir à la liste</a>
-        </div>
+  <div class="detail-card">
+    {% if article.imageFilename %}
+    <img
+      src="{{ asset('uploads/articles/' ~ article.imageFilename) }}"
+      alt="Image de l'article"
+      class="detail-image"
+    />
+    {% endif %}
+    <div class="detail-content">
+      <h1 class="article-title">{{ article.title }}</h1>
+      <h2 class="article-summary-title">Résumé :</h2>
+      <p class="article-summary">{{ article.summary }}</p>
+      <h2 class="article-content-title">Ingrédient :</h2>
+      <div class="article-content">{{ article.content | nl2br }}</div>
+      <a href="{{ path('app_article') }}" class="retour">Revenir à la liste</a>
     </div>
+  </div>
 </div>
 {% endblock %}
-

@@ -1,20 +1,20 @@
 controllers:
-    resource:
-        path: ../src/Controller/
-        namespace: App\Controller
-    type: attribute
+  resource:
+    path: ../src/Controller/
+    namespace: App\Controller
+  type: attribute
 
 app_register:
-    path: /inscription
-    controller: App\Controller\RegistrationController::register
-    methods: [GET, POST]
+  path: /inscription
+  controller: App\Controller\RegistrationController::register
+  methods: [GET, POST]
 
 app_login:
-    path: /connexion
-    controller: App\Controller\SecurityController::login
-    methods: [GET, POST]
+  path: /connexion
+  controller: App\Controller\SecurityController::login
+  methods: [GET, POST]
 
 app_logout:
-    path: /logout
-    controller: App\Controller\SecurityController::logout
-    methods: [GET]
+  path: /logout
+  controller: App\Controller\SecurityController::logout
+  methods: [GET]

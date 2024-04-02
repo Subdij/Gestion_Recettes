@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ asset('style/nav.css') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('uploads/favicon.ico') }}" />
-</head>
-<body>
+    <link rel="stylesheet" href="{{ asset('style/nav.css') }}" />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ asset('uploads/favicon.ico') }}"
+    />
+  </head>
+  <body>
     <div class="navbar">
-        <a href="{{ path('app_article') }}">Accueil</a>
-        {% if app.user %}
-            <a href="{{ path('app_logout') }}">Déconnexion</a>
-        {% else %}
-            <a href="{{ path('app_login') }}">Connexion</a>
-            <a href="{{ path('app_register') }}">Inscription</a>
-        {% endif %}
+      <a href="{{ path('app_article') }}">Accueil</a>
+      {% if app.user %}
+      <a href="{{ path('app_logout') }}">Déconnexion</a>
+      {% else %}
+      <a href="{{ path('app_login') }}">Connexion</a>
+      <a href="{{ path('app_register') }}">Inscription</a>
+      {% endif %}
     </div>
     {% block body %}{% endblock %}
-</body>
+  </body>
 </html>

@@ -19,10 +19,11 @@ class ArticleController extends AbstractController
 {
 
     #[Route('/article', name: 'app_article')]
-    public function index(Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository, SluggerInterface $slugger, ParameterBagInterface $params): Response    {
+    public function index(Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository, SluggerInterface $slugger, ParameterBagInterface $params): Response
+    {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
-    
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $imageFile */
@@ -33,11 +34,11 @@ class ArticleController extends AbstractController
                     $this->addFlash('danger', 'Seuls les fichiers JPG et PNG sont autorisés.');
                     return $this->redirectToRoute('app_article');
                 }
-    
+
                 $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$fileExtension;
-    
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fileExtension;
+
                 try {
                     $imageFile->move(
                         $params->get('articles_directory'),
@@ -45,18 +46,17 @@ class ArticleController extends AbstractController
                     );
                     $article->setImageFilename($newFilename);
                 } catch (FileException $e) {
-                    
                 }
             }
             $article->setCreatedAt(new \DateTime());
             $entityManager->persist($article);
             $entityManager->flush();
-    
+
             return $this->redirectToRoute('app_article');
         }
-    
+
         $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
-    
+
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
             'form' => $form->createView(),
@@ -65,72 +65,72 @@ class ArticleController extends AbstractController
 
 
 
-#[Route('/article/{id}', name: 'article_show')]
-public function article_show(int $id, EntityManagerInterface $entityManager): Response
-{
-    $article = $entityManager->getRepository(Article::class)->find($id);
+    #[Route('/article/{id}', name: 'article_show')]
+    public function article_show(int $id, EntityManagerInterface $entityManager): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
 
-    if (!$article) {
-        throw $this->createNotFoundException('L\'article demandé n\'existe pas.');
-    }
-
-    return $this->render('article/show.html.twig', [
-        'article' => $article,
-    ]);
-}
-
-
-
-
-
-
-
-#[Route('/article/edit/{id}', name: 'article_edit')]
-public function edit(int $id, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params): Response
-{
-    $article = $entityManager->getRepository(Article::class)->find($id);
-
-    if (!$article) {
-        throw $this->createNotFoundException('L\'article demandé n\'existe pas.');
-    }
-
-    $form = $this->createForm(ArticleType::class, $article);
-    $form->handleRequest($request);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-        /** @var UploadedFile $imageFile */
-        $imageFile = $form->get('imageFilename')->getData();
-        if ($imageFile) {
-            $fileExtension = $imageFile->guessExtension();
-            if (!in_array($fileExtension, ['jpg', 'jpeg', 'png'])) {
-                $this->addFlash('danger', 'Seuls les fichiers JPG et PNG sont autorisés.');
-                return $this->redirectToRoute('article_edit', ['id' => $id]);
-            }
-
-            $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = $slugger->slug($originalFilename);
-            $newFilename = $safeFilename.'-'.uniqid().'.'.$fileExtension;
-
-            try {
-                $imageFile->move(
-                    $params->get('articles_directory'),
-                    $newFilename
-                );
-                $article->setImageFilename($newFilename);
-            } catch (FileException $e) {
-                // Gérer l'exception si quelque chose se passe pendant le téléchargement du fichier
-            }
+        if (!$article) {
+            throw $this->createNotFoundException('L\'article demandé n\'existe pas.');
         }
 
-        $entityManager->flush();
-        return $this->redirectToRoute('app_article');
+        return $this->render('article/show.html.twig', [
+            'article' => $article,
+        ]);
     }
 
-    return $this->render('article/edit.html.twig', [
-        'article' => $article,
-        'form' => $form->createView(),
-    ]);
-}
+
+
+
+
+
+
+    #[Route('/article/edit/{id}', name: 'article_edit')]
+    public function edit(int $id, Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params): Response
+    {
+        $article = $entityManager->getRepository(Article::class)->find($id);
+
+        if (!$article) {
+            throw $this->createNotFoundException('L\'article demandé n\'existe pas.');
+        }
+
+        $form = $this->createForm(ArticleType::class, $article);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var UploadedFile $imageFile */
+            $imageFile = $form->get('imageFilename')->getData();
+            if ($imageFile) {
+                $fileExtension = $imageFile->guessExtension();
+                if (!in_array($fileExtension, ['jpg', 'jpeg', 'png'])) {
+                    $this->addFlash('danger', 'Seuls les fichiers JPG et PNG sont autorisés.');
+                    return $this->redirectToRoute('article_edit', ['id' => $id]);
+                }
+
+                $originalFilename = pathinfo($imageFile->getClientOriginalName(), PATHINFO_FILENAME);
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $fileExtension;
+
+                try {
+                    $imageFile->move(
+                        $params->get('articles_directory'),
+                        $newFilename
+                    );
+                    $article->setImageFilename($newFilename);
+                } catch (FileException $e) {
+                    // Gérer l'exception si quelque chose se passe pendant le téléchargement du fichier
+                }
+            }
+
+            $entityManager->flush();
+            return $this->redirectToRoute('app_article');
+        }
+
+        return $this->render('article/edit.html.twig', [
+            'article' => $article,
+            'form' => $form->createView(),
+        ]);
+    }
 
 
 
@@ -143,7 +143,7 @@ public function edit(int $id, Request $request, EntityManagerInterface $entityMa
     public function delete(int $id, EntityManagerInterface $entityManager): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        
+
         $article = $entityManager->getRepository(Article::class)->find($id);
 
         if (!$article) {
