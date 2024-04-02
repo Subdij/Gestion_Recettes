@@ -26,6 +26,9 @@ class Article
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $imageFilename = null;
 
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, options: ["default" => "CURRENT_TIMESTAMP"])]
+    private $createdAt;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class Article
     public function setImageFilename(?string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

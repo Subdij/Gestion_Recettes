@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Form\ArticleType;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,8 +19,7 @@ class ArticleController extends AbstractController
 {
 
     #[Route('/article', name: 'app_article')]
-    public function index(Request $request, EntityManagerInterface $entityManager, SluggerInterface $slugger, ParameterBagInterface $params): Response
-    {
+    public function index(Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository, SluggerInterface $slugger, ParameterBagInterface $params): Response    {
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
     
@@ -48,14 +48,14 @@ class ArticleController extends AbstractController
                     
                 }
             }
-    
+            $article->setCreatedAt(new \DateTime());
             $entityManager->persist($article);
             $entityManager->flush();
     
             return $this->redirectToRoute('app_article');
         }
     
-        $articles = $entityManager->getRepository(Article::class)->findAll();
+        $articles = $articleRepository->findBy([], ['createdAt' => 'DESC']);
     
         return $this->render('article/index.html.twig', [
             'articles' => $articles,
