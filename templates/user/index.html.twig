@@ -1,0 +1,29 @@
+{% set title = 'User' %} {% extends 'base.html.twig' %}
+
+{% block body %}
+<link rel="stylesheet" href="{{ asset('style/user.css') }}">
+
+<div class="container">
+<h1>Liste des utilisateurs</h1>
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>
+                    <a href="{{ path('user_delete', { id: user.id }) }}">Supprimer</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div></div>
+{% endblock %}

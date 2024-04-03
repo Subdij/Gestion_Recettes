@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+}
+
+table {
+    width: 50%;
+    margin: auto;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin-top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    transition: all 0.3s ease;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+td {
+    background-color: #f6f6f6;
+}
+
+td a {
+    color: #4CAF50;
+    text-decoration: none;
+}
+
+td a:hover {
+    text-decoration: underline;
+}
+
+tr:hover td {
+    background-color: #e9e9e9;
+}
+
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle farthest-side at 0% 50%,
+            #282828 23.5%,
+            rgba(255, 170, 0, 0) 0) 21px 30px,
+        radial-gradient(circle farthest-side at 0% 50%,
+            #2c3539 24%,
+            rgba(240, 166, 17, 0) 0) 19px 30px,
+        linear-gradient(#282828 14%,
+            rgba(240, 166, 17, 0) 0,
+            rgba(240, 166, 17, 0) 85%,
+            #282828 0) 0 0,
+        linear-gradient(150deg,
+            #282828 24%,
+            #2c3539 0,
+            #2c3539 26%,
+            rgba(240, 166, 17, 0) 0,
+            rgba(240, 166, 17, 0) 74%,
+            #2c3539 0,
+            #2c3539 76%,
+            #282828 0) 0 0,
+        linear-gradient(30deg,
+            #282828 24%,
+            #2c3539 0,
+            #2c3539 26%,
+            rgba(240, 166, 17, 0) 0,
+            rgba(240, 166, 17, 0) 74%,
+            #2c3539 0,
+            #2c3539 76%,
+            #282828 0) 0 0,
+        linear-gradient(90deg, #2c3539 2%, #282828 0, #282828 98%, #2c3539 0%) 0 0 #282828;
+    background-size: 40px 60px;
+}

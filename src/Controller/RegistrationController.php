@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,5 +41,24 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
         ]);
+    }
+
+    #[Route('/user', name: 'user_index')]
+    public function index(UserRepository $userRepository): Response
+    {
+        $users = $userRepository->findAll();
+
+        return $this->render('user/index.html.twig', [
+            'users' => $users,
+        ]);
+    }
+
+    #[Route('/user/{id}/delete', name: 'user_delete')]
+    public function user_delete(User $user, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('user_index');
     }
 }

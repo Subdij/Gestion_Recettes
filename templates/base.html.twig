@@ -13,6 +13,7 @@
     <div class="navbar">
       <a href="{{ path('app_article') }}">Accueil</a>
       {% if app.user %}
+      <a href="{{ path('user_index') }}">Utilisateurs</a>
       <a href="{{ path('app_logout') }}">Déconnexion</a>
       {% else %}
       <a href="{{ path('app_login') }}">Connexion</a>
