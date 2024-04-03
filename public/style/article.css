@@ -56,10 +56,10 @@ html {
     color: white;
 }
 
-h1,
-.mb-3 {
+h1, .mb-3 {
     text-align: center;
     padding-top: 40px;
+    padding-bottom: 40px;
     color: #fff;
     font-size: 2em;
 }
@@ -155,7 +155,7 @@ form h1 {
 }
 
 form {
-    margin: 20px auto;
+    margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;

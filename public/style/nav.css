@@ -16,10 +16,13 @@
     padding: 25px;
     text-decoration: none;
     font-size: 18px;
+
 }
 
 .navbar a:hover {
-    background-color: #ddd;
+    background-color: white;
     color: black;
     transition: 0.5s ease;
+    box-sizing: border-box;
+    box-shadow: inset 1px 1px 10px 0px black;
 }
