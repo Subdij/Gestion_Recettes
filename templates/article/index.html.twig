@@ -1,5 +1,7 @@
 {% set title = 'Liste des Chips' %} {% extends 'base.html.twig' %} {% block body%}
 <link rel="stylesheet" href="{{ asset('style/article.css') }}" />
+<script src="{{ asset('js/js.js') }}"></script>
+
 <div class="container">
   <h1>Liste des Chips</h1>
 
@@ -7,11 +9,21 @@
   <div class="mb-3">
     Bienvenue, <strong>{{ app.user.userIdentifier }}</strong>
   </div>
-  {{ form_start(form) }}
-  <h1>Ajouter des Chips</h1>
-  {{ form_widget(form) }}
-  {{ form_end(form) }}
+
+    <!-- Bouton pour afficher le formulaire -->
+    <div id="buttonContainer">
+      <button id="showFormButton">Ajouter un article</button>
+    </div>
+
+  <!-- Div contenant le formulaire -->
+  <div id="articleForm" class="container-form" style="position: absolute; right: -100%; transition: right 0.5s;">
+      {{ form_start(form) }}
+      <h1>Ajouter des Chips</h1>
+      {{ form_widget(form) }}
+      {{ form_end(form) }}
+  </div>
   {% endif %}
+
 
   <div class="articles-container">
     {% for article in articles %}
