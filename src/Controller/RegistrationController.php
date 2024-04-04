@@ -45,6 +45,9 @@ class RegistrationController extends AbstractController
         ]);
     }
 
+    
+
+
     #[Route('/user', name: 'user_index')]
     public function index(UserRepository $userRepository): Response
     {
@@ -56,6 +59,9 @@ class RegistrationController extends AbstractController
             'users' => $users,
         ]);
     }
+
+
+
 
     #[Route('/user/{id}/delete', name: 'user_delete')]
     public function user_delete(User $user, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, SessionInterface $session): Response
