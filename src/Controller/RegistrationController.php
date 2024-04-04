@@ -46,6 +46,8 @@ class RegistrationController extends AbstractController
     #[Route('/user', name: 'user_index')]
     public function index(UserRepository $userRepository): Response
     {
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $users = $userRepository->findAll();
 
         return $this->render('user/index.html.twig', [
@@ -53,16 +55,12 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/user', name: 'user_index')]
-    public function user_delet(UserRepository $userRepository): Response
+    #[Route('/user/{id}/delete', name: 'user_delete')]
+    public function user_delete(User $user, EntityManagerInterface $entityManager): Response
     {
-        
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $entityManager->remove($user);
+        $entityManager->flush();
 
-        $users = $userRepository->findAll();
-
-        return $this->render('user/index.html.twig', [
-            'users' => $users,
-        ]);
+        return $this->redirectToRoute('user_index');
     }
 }

@@ -37,8 +37,8 @@
           class="article-image"
         />
         {% endif %}
-        <h2 class="article-title">{{ article.title }}</h2>
-        <p class="article-summary">{{ article.summary }}</p>
+        <h2 class="article-title">{{ article.title | nl2br }}</h2>
+        <p class="article-summary">{{ article.summary | nl2br }}</p>
       </a>
 
       {% if app.user %}
