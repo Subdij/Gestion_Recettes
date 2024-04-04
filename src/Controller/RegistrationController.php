@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\UserRepository;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,11 +58,24 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/user/{id}/delete', name: 'user_delete')]
-    public function user_delete(User $user, EntityManagerInterface $entityManager): Response
+    public function user_delete(User $user, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage, SessionInterface $session): Response
+
     {
+        if ($this->getUser() === $user) {
+
+            $tokenStorage->setToken(null);
+
+            $session->invalidate();
+    
+            $entityManager->remove($user);
+            $entityManager->flush();
+    
+            return $this->redirectToRoute('app_login');
+        }
+    
         $entityManager->remove($user);
         $entityManager->flush();
-
+    
         return $this->redirectToRoute('user_index');
     }
 }
