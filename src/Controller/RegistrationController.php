@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\UserRepository;
@@ -58,6 +59,13 @@ class RegistrationController extends AbstractController
         return $this->render('user/index.html.twig', [
             'users' => $users,
         ]);
+    }
+
+
+    #[Route('/', name: 'home')]
+    public function home(): RedirectResponse
+    {
+        return $this->redirectToRoute('app_article');
     }
 
 
