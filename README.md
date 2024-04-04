@@ -8,7 +8,7 @@
             <pre class="command">composer install</pre>
             <h3>Lancement du Projet</h3>
             <pre class="command">symfony server:start</pre>
-            <p>Ouvrez <a href="http://localhost:8000/article">http://localhost:8000/article</a> pour explorer l'application.</p>
+            <p>Ouvrez <a href="http://localhost:8000">http://localhost:8000</a> pour explorer l'application.</p>
         </div>
     </div>
 </body>
