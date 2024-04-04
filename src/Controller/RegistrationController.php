@@ -53,12 +53,16 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    #[Route('/user/{id}/delete', name: 'user_delete')]
-    public function user_delete(User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/user', name: 'user_index')]
+    public function user_delet(UserRepository $userRepository): Response
     {
-        $entityManager->remove($user);
-        $entityManager->flush();
+        
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        return $this->redirectToRoute('user_index');
+        $users = $userRepository->findAll();
+
+        return $this->render('user/index.html.twig', [
+            'users' => $users,
+        ]);
     }
 }
