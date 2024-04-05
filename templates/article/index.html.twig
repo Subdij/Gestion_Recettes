@@ -1,6 +1,19 @@
 {% set title = 'Liste des Chips' %} {% extends 'base.html.twig' %} {% block body%}
 <link rel="stylesheet" href="{{ asset('style/article.css') }}" />
+<link rel="stylesheet" href="{{ asset('style/loader.css') }}" />
 <script src="{{ asset('js/js.js') }}"></script>
+
+
+<div id="loading-screen" class="container-loader">
+  <div  class="wrapper">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+    <div class="shadow"></div>
+  </div>
+</div>
 
 <div class="container">
   <h1>Liste des Chips</h1>
